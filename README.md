@@ -9,3 +9,5 @@ my first Slack bot!
 * /kbot-uptime - how long i've survived
 * /kbot-userinfo - who are you again?
 * /kbot-avatar - ur face, but digital
+
+![kBOT](final.png)
