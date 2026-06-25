@@ -1,3 +1,4 @@
+const startTime = Date.now();
 const axios = require("axios");
 require("dotenv").config();
 
@@ -55,6 +56,44 @@ ${response.data.punchline}`
   }
 });
 
+
+app.command("/kbot-uptime", async ({ ack, respond }) => {
+  await ack();
+
+  const uptimeMs = Date.now() - startTime;
+  const uptimeMinutes = Math.floor(uptimeMs / 60000);
+  const uptimeHours = Math.floor(uptimeMinutes / 60);
+
+  await respond(
+    `🤖 kBOT has been online for ${uptimeHours} hours and ${uptimeMinutes % 60} minutes.`
+  );
+});
+
+app.command("/kbot-userinfo", async ({ command, ack, client, respond }) => {
+  await ack();
+
+  const user = await client.users.info({
+    user: command.user_id
+  });
+
+  await respond(
+    `👤 Name: ${user.user.real_name}
+🆔 User ID: ${user.user.id}
+📛 Username: @${user.user.name}`
+  );
+});
+
+app.command("/avatar", async ({ command, ack, client, respond }) => {
+  await ack();
+
+  const user = await client.users.info({
+    user: command.user_id
+  });
+
+  await respond(
+    `🖼️ Your profile picture:\n${user.user.profile.image_512}`
+  );
+});
 
 (async () => {
   await app.start();
