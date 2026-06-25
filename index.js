@@ -25,7 +25,10 @@ app.command("/kbot-help", async ({ ack, respond }) => {
 /kbot-ping - check bot latency
 /kbot-catfact - a fact abt cats!
 /kbot-joke - be ready to laugh!
-/kbot-help - confused? type this in!`
+/kbot-help - confused? type this in!
+/kbot-uptime - how long i survived
+/kbot-userinfo - who are you again?
+/kbot-avatar - ur face, but digital`
   });
 });
 
@@ -65,7 +68,7 @@ app.command("/kbot-uptime", async ({ ack, respond }) => {
   const uptimeHours = Math.floor(uptimeMinutes / 60);
 
   await respond(
-    `🤖 kBOT has been online for ${uptimeHours} hours and ${uptimeMinutes % 60} minutes.`
+    `kBOT has been online for ${uptimeHours} hours and ${uptimeMinutes % 60} minutes.`
   );
 });
 
@@ -77,13 +80,13 @@ app.command("/kbot-userinfo", async ({ command, ack, client, respond }) => {
   });
 
   await respond(
-    `👤 Name: ${user.user.real_name}
-🆔 User ID: ${user.user.id}
-📛 Username: @${user.user.name}`
+    `Name: ${user.user.real_name}
+User ID: ${user.user.id}
+Username: @${user.user.name}`
   );
 });
 
-app.command("/avatar", async ({ command, ack, client, respond }) => {
+app.command("/kbot-avatar", async ({ command, ack, client, respond }) => {
   await ack();
 
   const user = await client.users.info({
@@ -91,7 +94,7 @@ app.command("/avatar", async ({ command, ack, client, respond }) => {
   });
 
   await respond(
-    `🖼️ Your profile picture:\n${user.user.profile.image_512}`
+    `Your profile picture:\n${user.user.profile.image_512}`
   );
 });
 
